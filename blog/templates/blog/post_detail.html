@@ -11,7 +11,10 @@
         </aside>
 
         {% if post.published_date %}
-            <strong>Published on: </strong><time class="date"> {{ post.published_date }}</time>
+            <strong>Published on: </strong>
+            <time class="date"> {{ post.published_date }}</time>
+            {% else %}
+            <a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
         {% endif %}
         <h2>Title: {{ post.title }}</h2>
         <p><strong>Text: </strong> {{ post.text|linebreaksbr }}</p>
