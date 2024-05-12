@@ -1,0 +1,451 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: darkgrey;
+    /* height: 3000px; */
+}
+
+:focus-visible {
+    outline: 1px solid white;
+}
+
+
+
+/* ---------- 'header.html' ---------- */
+.page-header {
+    background-color: lightpink;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.page-header a {
+    transition: all ease-out 500ms;
+}
+
+.page-header-left-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex: 1
+}
+
+.page-header-left-section a {
+    color: white;
+    text-decoration-line: none;
+    padding: 4px;
+    margin-right: 6px;
+    font-size: 3em;
+}
+
+.page-header-left-section a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.page-header-left-section a:active {
+    text-decoration: overline wavy rgba(255, 255, 255, 0.8);
+}
+
+.page-header-username {
+    text-transform: uppercase;
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.page-header-middle-section {
+    font-family: 'Lobster Two', sans-serif;
+    flex: 3;
+    text-align: center;
+}
+
+.page-header-middle-section a,
+.page-header-middle-section a:visited {
+    color: #fff;
+}
+
+.page-header-middle-section a:active {
+    color: #fff;
+    text-decoration: overline solid;
+}
+
+.page-header-middle-section a:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.page-header-right-section {
+    float: left;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+}
+
+.page-header-right-section a {
+    padding: 2px 6px;
+    margin-left: 10px;
+}
+
+.page-header-right-section a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+/* 
+However the {% if user.is_authenticated %} is
+in the HTML template, this is only for maintaining the 
+header layout. used JS to add the below class name! 
+*/
+.page-header-right-section-disappear-when-loggedout {
+    visibility: hidden;
+}
+
+
+/* ---------- 'base.html' ---------- */
+main {
+    font-family: 'Roboto', sans-serif;
+    padding-top: 120px;
+    padding-left: 36px;
+    padding-right: 36px;
+}
+
+.flash-messages-container {
+    text-align: center;
+    padding: 1rem 3rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    border-radius: 10px;
+    width: 70%;
+    margin: auto;
+}
+
+.flash-message-success {
+    box-shadow: 0px 0px 5px lightgreen;
+}
+
+.flash-message-error {
+    box-shadow: 0px 0px 5px tomato;
+}
+
+.date-container {
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    float: right;
+    font-size: 0.9em;
+}
+
+.date {
+    padding: 0px 6px;
+    color: grey;
+}
+
+
+
+/* ---------- 'post_list.html' ---------- */
+.post-title,
+.post-text,
+.post-comments-title {
+    font-family: 'Lobster Two', 'Roboto', sans-serif;
+}
+
+.post-title {
+    font-size: 1.5em;
+}
+
+.post-text {
+    font-weight: bolder;
+    font-size: 1.3em;
+}
+
+.post-comments-title {
+    font-size: 1.3em;
+    color: rgba(0, 0, 0, 0.13);
+    text-decoration-line: none;
+}
+.post a,
+.post a:active,
+.post a:visited {
+    color: pink;
+}
+
+.post a:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+
+
+/* ---------- 'post_detail.html' ---------- */
+.post-detail-icon-container {
+    float: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 40px;
+}
+
+.post-detail-icon-container a {
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-left: 12px;
+}
+
+.post-detail-publish {
+    background-color: lightblue;
+}
+
+.post-detail-publish:hover {
+    background-color: rgba(173, 216, 230, 0.884);
+}
+
+.post-detail-edit {
+    background-color: lightgray;
+}
+
+.post-detail-edit:hover {
+    margin-left: 12px;
+    background-color: rgba(211, 211, 211, 0.884);
+}
+
+.post-detail-delete {
+    background-color: rgb(255, 61, 61);
+    margin-right: 18px;
+}
+
+.post-detail-delete:hover {
+    background-color: rgba(255, 61, 61, 0.884);
+}
+
+.comment-section-title {
+    font-family: 'Lobster Two', 'Roboto', sans-serif;
+    font-size: 1.5em;
+    margin-bottom: 0;
+}
+
+.comment-section-add-comment-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    color: rgba(255, 255, 255, 0.973);
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background-color: #ccccccea;
+}
+
+.comment-section-add-comment-link:hover {
+    
+    background-color: #ccc;
+    border-radius: 6px;
+}
+
+.comment-section {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    width: 96%;
+    margin: auto;
+    margin-bottom: 50px;
+    padding: 14px;
+    border: 1px solid #ffffff7a;
+    border-radius: 6px;
+    box-shadow: 0 0 5px lightpink;
+}
+
+.comment-section-icon-container {
+    display: inline-flex;
+    align-items: center;
+    float: right;
+    margin-right: 18px;
+}
+
+.comment-section-icon-container a {
+    padding: 8px 10px 4px 10px;
+    transition: all ease-out 500ms;
+}
+
+.comment-section-icon-container a:hover {
+    background-color: rgba(204, 204, 204, 0.3);
+    border-radius: 8px;
+}
+
+.comment-author-name {
+    font-size: 1.3em;
+    color: #fffffff3;
+    text-transform: lowercase;
+}
+
+
+
+/* ---------- 'post_edit.html' ---------- */
+.form-field {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field input[type="text"],
+.form-field input[type="password"],
+.form-field textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: transparent;
+    box-sizing: border-box;
+    font-family:'Roboto', sans-serif;
+    caret-color: black;
+}
+
+.form-field label {
+    font-family: 'Lobster Two', 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 1.2em;
+
+}
+
+#id_title,
+#id_username,
+#id_password1,
+#id_password2 {
+    font-size: 16px;
+    margin-top: 2px; 
+    /* 
+    
+    used margin on ".form-field label" but doesn't work
+    except for right and left. kinda weird tho. never mind since the
+    form is rendering from Form-based Approach (Python - forms.py).
+    changed the placeholders and some other stuff from there. check it
+    out.
+    */
+}
+
+#id_text {
+    height: 200px;
+    font-size: 16px;
+    margin-top: 3px;
+}
+
+.new-post-form-button-container {
+    float: right;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.new-post-form button {
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    float: right;
+}
+
+.new-post-form-button-submit {
+    background-color: lightblue;
+}
+
+.new-post-form-button-submit:hover {
+    background-color: rgba(173, 216, 230, 0.829);
+}
+
+.new-post-form-button-back {
+    background-color: lightpink;
+    margin-left: 12px;
+}
+
+.new-post-form-button-back:hover {
+    background-color: rgba(255, 182, 193, 0.829);
+}
+
+
+
+/* ---------- 'register.html' ---------- */
+/* ---------- 'login.html' ---------- */
+/* "form-field" style is in 'post_edit.html' section */
+.form-register-login-title {
+    text-align: center;
+    font-family: monospace, 'Roboto', sans-serif;
+}
+
+.form-register-login {
+    width: 55%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-register-button-register,
+.form-login-button-login,
+.form-login-button-back {
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all ease-out 500ms;
+}
+
+.form-register-button-register {
+    margin-left: 8px;
+    margin-right: 6px;
+}
+
+.form-login-buttons-container {
+    margin-bottom: 10px;
+}
+
+.form-register-button-register,
+.form-login-button-login {
+    background-color: lightblue;
+}
+
+.form-register-button:hover,
+.form-login-button-login:hover {
+    background-color: rgba(173, 216, 230, 0.800);
+}
+
+.form-login-button-back {
+    background-color: grey;
+    margin: 0 6px;
+}
+
+.form-login-button-back:hover {
+    background-color: rgba(128, 128, 128, 0.800);
+}
+
+.form-register-login small {
+    color: grey;
+}
+
+.form-register-login small a {
+    color: darkslategrey
+}
+
+.form-register-login small a:hover {
+    color: rgba(47, 79, 79, 0.600)
+}
+
+.error {
+    color: red;
+    font-size: 0.8em;
+}
+
+.help-text {
+    margin-left: 6px;
+    font-size: 0.9em;
+}
+
