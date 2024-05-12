@@ -1,24 +1,104 @@
-{% extends 'blog/base.html' %}
+{% extends 'base.html' %}
 {% block content %}
 
-    <article class="post">
-        <aside class="actions">
-            {% if user.is_authenticated %}
-                <a class="btn btn-secondary" href="{% url 'post_edit' pk=post.pk %}">
-                    {% include './icons/pencil-fill.svg' %}
-                </a>
-            {% endif %}
-        </aside>
+<article class="post-detail">
+  {% if post.published_date %}
+  <span class="post-detail-icon-container">
+    {% if request.user and post.author and request.user.id == post.author.id %}
+    <a href="{% url 'post_remove' pk=post.pk %}" title="delete the post" class="post-detail-delete">
+      Delete
+    </a>
+    {% endif %}
+    <div class="date-container">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e8eaed">
+        <path
+          d="M360-300q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z" />
+      </svg>
+      <time class="date"> {{ post.published_date }}</time>
 
-        {% if post.published_date %}
-            <strong>Published on: </strong>
-            <time class="date"> {{ post.published_date }}</time>
-            {% else %}
-            <a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+    </div>
+  </span>
+  {% else %}
+
+  {% if request.user and post.author and request.user.id == post.author.id %}
+  <aside class="post-detail-icon-container">
+    <a href="{% url 'post_publish' pk=post.pk %}" title="publish the post" class="post-detail-publish">
+      Publish
+    </a>
+
+    <a href="{% url 'post_edit' pk=post.pk %}" title="edit the post" class="post-detail-edit">
+      Edit
+    </a>
+
+    <a href="{% url 'post_remove' pk=post.pk %}" title="delete the post" class="post-detail-delete">Delete</a>
+  </aside>
+  {% endif %}
+  {% endif %}
+
+
+  <h2><span class="post-title">Post Title:</span> {{ post.title }}</h2>
+  <p><span class="post-title">Post Text:</span> {{ post.text|linebreaksbr }}</p>
+</article>
+<hr>
+
+
+<!-- COMMENTS SECTION -->
+
+
+<h2 class="comment-section-title">Comments:</h2>
+<a href="{% url 'add_comment_to_post' pk=post.pk %}" class="comment-section-add-comment-link">
+  {% if request.user.is_authenticated %}
+  <span>Add comment</span>
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+    <path
+      d="M440-400h80v-120h120v-80H520v-120h-80v120H320v80h120v120ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z" />
+  </svg>
+  {% else %}
+  <!-- 
+  add_comment_to_post function in "views.py" will redirect to login page 
+  & redirect user to add comment.  
+-->
+  <span>Login to comment!</span>
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+    <path
+      d="M440-400h80v-120h120v-80H520v-120h-80v120H320v80h120v120ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z" />
+  </svg>
+  {% endif %}
+</a>
+
+
+
+{% for comment in post.comments.all %}
+<div class="comment-section">
+  <ul>
+    <li>
+      <div class="comment-section-icon-container">
+        <div class="date-container">
+          <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e8eaed">
+            <path
+              d="M360-300q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z" />
+          </svg>
+          <time class="date">{{ comment.created_date }}</time>
+        </div>
+
+        <!-- user-remove-comment icon -->
+        {% if request.user and comment.author.id == request.user.id or request.user.is_superuser %}
+        <a href="{% url 'comment_remove' pk=comment.pk %}" title="delete comment">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+            <path d="M166-417v-126h628v126H166Z" />
+          </svg>
+        </a>
+
         {% endif %}
-        <h2>Title: {{ post.title }}</h2>
-        <p><strong>Text: </strong> {{ post.text|linebreaksbr }}</p>
-    </article>
+      </div>
+      <strong class="comment-author-name">@{{ comment.author }}</strong>
+      <p>{{ comment.text|linebreaks }}</p>
+    </li>
+  </ul>
+</div>
 
+{% empty %}
+<p>No comments here yet :(</p>
+{% endfor %}
 
 {% endblock %}

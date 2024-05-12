@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="form-register-login-title">
+  Login to your account! 🐝
+</h1>
+
+<form action="" method="post" class="form-register-login">
+    {% csrf_token %}
+    <div class="form-field">
+      {{ form.username.label_tag }}
+      {{ form.username }}
+    </div>
+    
+    <div class="form-field">
+      {{ form.password.label_tag }}
+      {{ form.password }}
+    </div>
+
+  <div class="form-login-buttons-container">
+    <button type="submit" class="form-login-button-login">Login</button>
+    <button type="button" class="form-login-button-back" onclick="location.href='{{ request.META.HTTP_REFERER }}'">
+      Back
+    </button>
+  </div>
+
+  <small>
+    Don't have an account? <a href="{% url 'register' %}">Register</a>
+  </small>
+</form>
+
+{% endblock %}

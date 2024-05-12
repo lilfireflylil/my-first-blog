@@ -1,0 +1,39 @@
+{% load static %}
+<div class="page-header">
+  <div class="page-header-left-section">
+    {% if request.user.is_authenticated %}
+    <a class="logout-icon" href="{% url 'logout' %}" title="logout" onclick="disappearRightSection()">🌜</a>
+    <span class="page-header-username">@{{ request.user.username }}</span>
+
+    {% else %}
+    
+    <a href="{% url 'login' %}" title="login">🌞</a>
+    <a href="{% url 'register' %}" title="register an account">🍦</a>
+    
+    {% endif %}
+  </div>
+
+
+  <div class="page-header-middle-section">
+    <h1><a href="/">Django Boys Blog</a></h1>
+  </div>
+
+
+  <div class="page-header-right-section">
+    {% if user.is_authenticated %}
+    <a href="{% url 'post_new' %}" title="create a post">
+      <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#FFFFFF">
+        <path
+          d="M160-120v-142l556.33-556q11.34-11.33 24-16.67Q753-840 766.67-840q13.33 0 25.83 5.33Q805-829.33 816-818l42 42q11.33 10.33 16.67 22.83 5.33 12.5 5.33 26.5 0 13-5.33 26-5.34 13-16.67 24.34L302-120H160Zm66.67-66.67h48l428.33-428L679-639l-24.33-24-428 428.33v48Zm587.33-539L765.67-774 814-725.67ZM679-639l-24.33-24L703-614.67 679-639ZM560-120q76.67 0 138.33-36.67Q760-193.33 760-260q0-38.67-26-69.67t-78.67-50l-51 51q41 11.34 65 30 24 18.67 24 38.67 0 29-39.16 51.17Q615-186.67 560-186.67q-13.67 0-23.5 9.5t-9.83 23.84q0 13.66 9.83 23.5Q546.33-120 560-120ZM221-418l52-52q-42.67-11.33-64.5-23.83-21.83-12.5-21.83-26.17 0-14.67 20.33-28.33Q227.33-562 291.33-587q84.67-33.33 113.34-62.67 28.66-29.33 28.66-69.66 0-55.67-42-88.17T280-840q-43 0-77.5 15t-52.17 37.33q-9 10.34-8 23.67 1 13.33 12.67 22 11 9 24.67 7.33 13.66-1.66 22.66-10.66 14.67-14.67 33-21.34 18.34-6.66 44.67-6.66 44.33 0 65.5 16t21.17 38q0 18-18.5 31.83-18.5 13.83-83.5 39.5-89.34 34.33-117 62.5Q120-557.33 120-520q0 32 24.33 59.5Q168.67-433 221-418Z" />
+      </svg>
+    </a>
+
+    <a href="{% url 'post_draft_list' %}" title="show drafts" class="link">
+      <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#FFFFFF">
+        <path
+          d="M226.67-80q-27 0-46.84-19.83Q160-119.67 160-146.67v-666.66q0-27 19.83-46.84Q199.67-880 226.67-880H574l226 226v507.33q0 27-19.83 46.84Q760.33-80 733.33-80H226.67Zm314-542.67v-190.66h-314v666.66h506.66v-476H540.67Zm-314-190.66v190.66-190.66 666.66-666.66Z" />
+      </svg>
+    </a>
+    {% endif %}
+  </div>
+</div>

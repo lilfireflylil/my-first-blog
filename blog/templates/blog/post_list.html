@@ -1,15 +1,29 @@
-{% extends 'blog/base.html' %}
+{% extends 'base.html' %}
 {% block content %}
 
 
-    {% for post in posts %}
-    <article class="post">
-            <strong>Published on: </strong><time class="date"> {{ post.published_date }}</time>
-            <h2>Title: <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
-            <p><strong>Text: </strong> {{ post.text|linebreaksbr }}</p>
-            <hr>
-        </article>
-    {% endfor %}
+{% for post in posts %}
+<article class="post">
+  <div class="date-container">
+    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e8eaed">
+      <path
+        d="M360-300q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z" />
+    </svg>
+    <time class="date"> {{ post.published_date }}</time>
+  </div>
+  <h2>
+    <span class="post-title">Post Title:</span>
+    <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
+  </h2>
+  <p><span class="post-text">Post Text:</span> {{ post.text|linebreaksbr }}</p>
+  <a href="{% url 'post_detail' pk=post.pk %}" class="post-comments-title">
+    {{ post.comments.count }} comment{{ post.comments.count|pluralize }}
+  </a>
+
+  <hr>
+  <br>
+</article>
+{% endfor %}
 
 
 {% endblock %}

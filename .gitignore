@@ -1,12 +1,10 @@
-# icons folder
-icons/
-
 # Python
 *.pyc
 *~
 __pycache__
 
 # Env
+.venv/
 .env
 myvenv/
 venv/

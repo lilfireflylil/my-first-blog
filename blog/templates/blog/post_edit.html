@@ -1,11 +1,28 @@
-{% extends 'blog/base.html' %}
+{% extends 'base.html' %}
 {% block content %}
 
-    <h2>New post</h2>
-    <form action="" method="post" class="post-form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-secondary">Save</button>
-    </form>
+<h2 class="create-new-post-title">Create new post:</h2>
+<form action="" method="post" autocomplete="off" class="new-post-form">
+  {% csrf_token %}
+  <div class="form-field">
+    {{ form.title.label_tag }}
+    {{ form.title }}
+  </div>
+  <div class="form-field">
+    {{ form.text.label_tag }}
+    {{ form.text }}
+  </div>
 
+  <span class="new-post-form-button-container">
+    <button type="submit" class="new-post-form-button-submit">
+      Create
+    </button>
+    <button onclick="location.href='{{ request.META.HTTP_REFERER }}'" type="button" class="new-post-form-button-back">
+      Back
+    </button>
+
+  </span>
+
+
+</form>
 {% endblock %}

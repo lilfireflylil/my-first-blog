@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="form-register-login-title">
+  Create an account! 🌼
+</h1>
+
+<form action="" method="post" class="form-register-login">
+    {% csrf_token %}
+    <div class="form-field">
+      {{ form.username.label_tag }}
+      {{ form.username }}
+      {% for error in form.username.errors %}
+      <div class="error">
+          <ul>
+            <li>
+              {{ error }}
+            </li>
+          </ul>
+      </div>
+      {% endfor %}
+      <div class="help-text">{{ form.username.help_text }}</div>
+    </div>
+    <div class="form-field">
+      {{ form.password1.label_tag }}
+      {{ form.password1 }}
+      {% for error in form.password1.errors %}
+      <div class="error">
+        <ul>
+          <li>
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+      {% endfor %}
+      <div class="help-text">
+        {{ form.password1.help_text }}
+      </div>
+    </div>
+    <div class="form-field">
+      {{ form.password2.label_tag }}
+      {{ form.password2 }}
+      {% for error in form.password2.errors %}
+      <div class="error">
+        <ul>
+          <li>
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+      {% endfor %}
+      <div class="help-text">{{ form.password2.help_text }}</div>
+    </div>
+
+    <div>
+      <button type="submit" class="form-register-button-register">
+        Register
+      </button>
+      <small class="already-have-an-account-text">
+        Already have an account? 
+        <a href="{% url 'login' %}">Login</a>
+      </small>
+    </div>
+</form>
+
+
+
+{% endblock %}
